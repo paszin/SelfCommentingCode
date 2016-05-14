@@ -1,0 +1,3 @@
+a = 6
+#This line uses the famous + operator
+e = a + 1
