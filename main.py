@@ -25,6 +25,7 @@ for dirpath, dirnames, filenames in os.walk(path):
                 for i, line in enumerate(contentList):
                 	if patternFinder.TheEasyPlusRule.isMatching(line):
                 		comment = patternFinder.TheEasyPlusRule.getComment(line)
+                        comment += patternFinder.StackOverflowCommentary.getComment(line)
                 		contentListNew.insert(i, comment)
                 print('\n'.join(contentListNew))
             with open(os.path.join(dirpath, fn+".scc"), "w") as f:
