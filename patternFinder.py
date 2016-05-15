@@ -7,7 +7,6 @@ import sys
 import os
 import json
 import subprocess
-import urllib2
 import requests
 import so_helper
 import phrases_pool as phrases
@@ -81,7 +80,7 @@ class HackerComments(Rule):
 class Todo(Rule):
 
 	def getComment(self):
-		return "TODO: consider scenario where " + (self.line.replace('if', 'if ').split(" ")[1]).strip() + " > 5"
+		return "TODO: consider scenario where " + (self.line.replace('if', 'if ').replace(2*' ', ' ').split(" ")[1]).strip() + " > 5"
 
 
 	def isMatching(self):
@@ -89,7 +88,7 @@ class Todo(Rule):
 
 class BuiltInExplain(Rule):
 
-	keywords = ["range", "xrange", "map", "max", "min", "int", "len", "str", "abs"]
+	keywords = ["range", "xrange", "map", "max", "min", "int", "len", "str", "abs", "enumerate", "buffer"]
 
 	def getComment(self):
 		return " ".join([phrases.getRandomOpinion()+",", 
@@ -100,6 +99,17 @@ class BuiltInExplain(Rule):
 			if k+'(' in self.line:
 				self.matchingKeyword = k
 				return True
+
+
+class FixMe(Rule):
+
+	def getComment(self):
+		bugUrl = "https://bugs.python.org/issue" + str(int(random.random()*10**5))
+		return "Fix: " + "This bahavoir is because of " + bugUrl
+
+	def isMatching(self):
+		return self.line.count('.') > 2
+
 
 
 if __name__ == '__main__':
@@ -114,5 +124,8 @@ if __name__ == '__main__':
 
 	r = HackerComments(content, "#")
 	print(r.getComment())
+
+	r = FixMe('', '...')
+	print(r.isMatching(), r.getComment())
 
 
