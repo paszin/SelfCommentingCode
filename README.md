@@ -3,7 +3,7 @@ this serious tool will make your code more readable, easier to understand and mo
 
 
 ## Setup
-`brew install googler`
+`brew install ruby`
 
 ## Comment Types
 
@@ -18,3 +18,4 @@ this serious tool will make your code more readable, easier to understand and mo
 [ ] git blame and commit logs
 [ ] poetry
 [ ] random facts
+[ ] ascii arts

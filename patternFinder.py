@@ -18,6 +18,7 @@ def getAllRules():
 
 
 class Rule:
+	'''Basic Class, all Rules are inherited from this''' 
 
 	def __init__(self, content, line):
 		self.content = content
