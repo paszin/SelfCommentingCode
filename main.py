@@ -14,7 +14,7 @@ except:
 	path = "./example"
 
 endings = ["py"]
-commentPrefix = '#&#'
+commentPrefix = '#&# '
 
 for dirpath, dirnames, filenames in os.walk(path):
 	for fn in filenames:
@@ -32,9 +32,9 @@ for dirpath, dirnames, filenames in os.walk(path):
 							comment = rule.getComment()
 							offset += 1
 							if type(comment) == list:
-								offset += len(comment) - 1
+								offset += (len(comment) - 2)
 								comment = ('\n' + commentPrefix).join(comment)
-							contentListNew.insert(i+offset, commentPrefix + comment)
+							contentListNew.insert(i+offset-1, commentPrefix + comment)
 				print('\n'.join(contentListNew))
 			with open(os.path.join(dirpath, fn+".scc"), "w") as f:
 				f.write('\n'.join(contentListNew))
