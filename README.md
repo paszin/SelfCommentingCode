@@ -6,7 +6,15 @@ this serious tool will make your code more readable, easier to understand and mo
 `brew install ruby`
 `gem install faker`
 `pip install requests`
+`chmod +x install-monty.sh`
+`cp install-monty.sh /usr/local/bin/install-monty.sh`
+
+From the project directory you'd like to set up:
 `install-monty.sh <full_path_to_this_dir>`
+`chmod +x /usr/local/bin/monty.sh`
+
+Now you can run `monty.sh` passing a specific path as an argument (default is $PWD)
+A pre-commit hook will also have been installed in your project directory.
 
 ## Comment Types
 
