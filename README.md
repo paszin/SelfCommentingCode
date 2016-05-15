@@ -1,4 +1,4 @@
-# SelfCommentingCode
+# Monty
 this serious tool will make your code more readable, easier to understand and more fun to collaborate
 
 
@@ -32,7 +32,15 @@ this serious tool will make your code more readable, easier to understand and mo
 
 [ ] random facts
 
-[ ] number facts
+[x] number facts
 
 [ ] ascii arts
 
+
+## Hall of Fame
+
+
+## Hall of Shame
+
+```#&# TODO: consider scenario where a > 0
+if a > 0:```
