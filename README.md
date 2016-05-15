@@ -1,4 +1,4 @@
-# SelfCommentingCode
+# Monty
 this serious tool will make your code more readable, easier to understand and more fun to collaborate
 
 
@@ -22,7 +22,7 @@ this serious tool will make your code more readable, easier to understand and mo
 
 [x] faked phrases 
 
-[x] --reasons-- excuses --(## do this for compatibility with version 3 from __future__ import print_function)--
+[x] ~~reasons~~ excuses ~~(## do this for compatibility with version 3 from __future__ import print_function)~~
 
 [ ] git blame and commit logs
 
@@ -30,7 +30,15 @@ this serious tool will make your code more readable, easier to understand and mo
 
 [ ] random facts
 
-[ ] number facts
+[x] number facts
 
 [ ] ascii arts
 
+
+## Hall of Fame
+
+
+## Hall of Shame
+
+```#&# TODO: consider scenario where a > 0
+if a > 0:```
