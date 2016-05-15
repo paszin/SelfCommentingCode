@@ -23,10 +23,10 @@ for dirpath, dirnames, filenames in os.walk(path):
             	contentList = content.split('\n')
             	contentListNew = contentList[:]
                 for i, line in enumerate(contentList):
-                	if patternFinder.TheEasyPlusRule.isMatching(line):
-                		comment = patternFinder.TheEasyPlusRule.getComment(line)
-                        comment += patternFinder.StackOverflowCommentary.getComment(line)
-                		contentListNew.insert(i, comment)
+                    for rule in patternFinder.getAllRules():
+                	if rule.isMatching(line):
+                		comment = rule.getComment(line)
+                        contentListNew.insert(i, comment)
                 print('\n'.join(contentListNew))
             with open(os.path.join(dirpath, fn+".scc"), "w") as f:
             	f.write('\n'.join(contentListNew))

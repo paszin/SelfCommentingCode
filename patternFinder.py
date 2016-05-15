@@ -2,7 +2,6 @@
 
 import re
 import random
-<<<<<<< HEAD
 import inspect
 import sys
 import os
@@ -11,10 +10,6 @@ import json
 def getAllRules():
     return [obj for name, obj in inspect.getmembers(sys.modules[__name__]) if inspect.isclass(obj)]
         
-=======
-import os
-import json
->>>>>>> c7aeff97b776d7af16b7c80fe72036ad662b2e02
 
 class TheEasyPlusRule:
 
@@ -38,5 +33,5 @@ class StackOverflowCommentary:
 
 	@classmethod
 	def isMatching(self, line):
-		return line(len) > 100
+		return len(line) > 100
 
