@@ -10,6 +10,9 @@ if a > 0:
 
 
 
+def fun():
+	return 72
+
 print("This is for debugging")
 
 class Amazing:
