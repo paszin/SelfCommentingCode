@@ -85,8 +85,7 @@ class HackerComments(Rule):
 	frequency = 1
 	
 	def getComment(self):
-		comment = subprocess.Popen("ruby faker.rb", shell=True, stdout=subprocess.PIPE).stdout.read()
-		return comment.split('\n')
+		return phrases.getRandomHackerComment() #subprocess.Popen("ruby faker.rb", shell=True, stdout=subprocess.PIPE).stdout.read()
 	
 	def isMatching(self):
 		return '#' in self.line and '#&#' not in self.line or "import" in self.line
@@ -132,7 +131,7 @@ class FixMe(Rule):
 class DoNotToucht(Rule):
 
 	def getComment(self):
-		return "!DO NOT TOUCH!"
+		return "!DO NOT TOUCH! Crucial to Thread Locking"  
 
 	def isMatching(self):
 		return len(self.line) > 80
@@ -145,7 +144,7 @@ class Meaning(Rule):
 		try:
 			float(value)
 		except:
-			return name + 'stores the state of the process'
+			return name + ' ' + phrases.getRandomMeaning()
 		else:
 			return name + 'is ' + value + ' but it could also be ' + str(round(float(value)*random.random()*2, 3)) + ' or ' + str(round(float(value)*random.random()*80, 1))
 
@@ -171,12 +170,12 @@ class Excuses(Rule):
 		return str(excuses.getRandomExcuse())
 
 	def isMatching(self):
-		return 'print' in self.line
+		return 'print' in self.line or "debug" in self.line.lower()
 
 class CopyCode(Rule):
 
 	def getComment(self):
-		return "This code is copied from "
+		return "This code is copied from " + so_helper.getSOUrl(random.choice(["function", "recursion"]))
 
 	def isMatching(self):
 		return self.line.startswith("def")

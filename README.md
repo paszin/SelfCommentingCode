@@ -1,16 +1,26 @@
 # Monty
-this serious tool will make your code more readable, easier to understand and more fun to collaborate
 
+Everybody hates writing comments. And erverybody is complaining about missing helpful comments.
+
+This serious tool will make your code more readable, easier to understand and more fun to collaborate
+
+### MAKE COLLABORATION GREAT AGAIN!
 
 ## Setup
 `brew install ruby`
+
 `gem install faker`
+
 `pip install requests`
+
 `chmod +x install-monty.sh`
+
 `cp install-monty.sh /usr/local/bin/install-monty.sh`
+
 
 From the project directory you'd like to set up:
 `install-monty.sh <full_path_to_this_dir>`
+
 `chmod +x /usr/local/bin/monty.sh`
 
 Now you can run `monty.sh` passing a specific path as an argument (default is $PWD)

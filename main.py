@@ -35,7 +35,7 @@ endings = ["py"]
 commentPrefix = '#&# '
 noFrequency = True
 newFile = True
-onlyOneComment = False
+onlyOneComment = True
 
 for dirpath, dirnames, filenames in os.walk(path):
 	for fn in filenames:
@@ -47,7 +47,9 @@ for dirpath, dirnames, filenames in os.walk(path):
 				contentListNew = contentList[:]
 				offset = 0
 				for i, line in enumerate(contentList):
-					for rulec in patternFinder.getAllRules():
+					allRules = patternFinder.getAllRules()
+					random.shuffle(allRules)
+					for rulec in allRules:
 						rule = rulec(content, line.strip())
 						if rule.isMatching() and (random.random() <= rule.frequency or noFrequency):
 							prefix = line.split(line.strip())[0] #code with indentation
