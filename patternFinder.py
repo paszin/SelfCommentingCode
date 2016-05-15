@@ -7,6 +7,10 @@ import sys
 import os
 import json
 import subprocess
+import urllib2
+import requests
+import so_helper
+
 
 def getAllRules():
     return [obj for name, obj in inspect.getmembers(sys.modules[__name__]) if inspect.isclass(obj)]
@@ -33,13 +37,21 @@ class StackOverflowCommentary:
 
 	@classmethod
 	def getComment(self, line, content=None):
-		return "go to stackoverflow" ## replace this with stackoverflow call
-	@classmethod
-	def isMatching(self, line, content=None):
-		return False ##skip for now
 		libs = StackOverflowCommentary.getLibs(content)
 		for lib in libs:
 			if lib in line:
+				q = lib + " bug" 
+		url = so_helper.getSOUrl(q)
+		print(url)
+		data = requests.get(url).json()
+		#print(data['items'][0])
+		return str(data['items'][0][u'title']) + '\n#' + "Details: " + "http://stackoverflow.com/questions/" + str(data['items'][0]['question_id'])
+	
+	@classmethod
+	def isMatching(self, line, content=None):
+		libs = StackOverflowCommentary.getLibs(content)
+		for lib in libs:
+			if lib in line and random.random() > 0.5:
 				return True
 
 class HackerComments:
@@ -56,10 +68,16 @@ class Todo:
 
 	@classmethod
 	def getComment(self, line, content):
-		return "TODO: consider scenario where " + line.split(" ")[0] + "> 5"
+		return "TODO: consider scenario where " + (line.split(" ")[0]).strip() + " > 5"
 
 
 	@classmethod
 	def isMatching(self, line, content):
 		return random.random() > 0.95
+
+
+
+if __name__ == '__main__':
+	print(StackOverflowCommentary.getComment('sys.argv', 'import sys'))
+
 
