@@ -10,6 +10,8 @@ if a > 0:
 
 
 
+print("This is for debugging")
+
 class Amazing:
 
 	def __init__(self):

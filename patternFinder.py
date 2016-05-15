@@ -11,6 +11,7 @@ import subprocess
 import requests
 import so_helper
 import phrases_pool as phrases
+import programmingexcuses as excuses
 
 
 def getAllRules():
@@ -89,7 +90,7 @@ class Todo(Rule):
 
 class BuiltInExplain(Rule):
 
-	keywords = ["range", "xrange", "map", "max", "min", "int", "len", "str", "abs", "enumerate", "buffer"]
+	keywords = ["range", "xrange", "map", "max", "min", " int", "len", "str", "abs", "enumerate", "buffer"]
 
 	def getComment(self):
 		return " ".join([phrases.getRandomOpinion()+",", 
@@ -147,6 +148,13 @@ class NumberFacts(Rule):
 			return True
 		return False
 
+class Excuses(Rule):
+
+	def getComment(self):
+		return str(excuses.getRandomExcuse())
+
+	def isMatching(self):
+		return 'print' in self.line
 
 if __name__ == '__main__':
 	print("Test Patterns")
@@ -168,6 +176,9 @@ if __name__ == '__main__':
 	print(r.isMatching(), r.getComment())
 
 	r = NumberFacts('', 'c = 4')
+	print(r.isMatching(), r.getComment())
+
+	r = Excuses('', 'print("hello")')
 	print(r.isMatching(), r.getComment())
 
 
