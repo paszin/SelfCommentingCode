@@ -29,12 +29,13 @@ for dirpath, dirnames, filenames in os.walk(path):
 					for rulec in patternFinder.getAllRules():
 						rule = rulec(content, line.strip())
 						if rule.isMatching():
+							prefix = line.split(line.strip())[0] #code with indentation
 							comment = rule.getComment()
 							offset += 1
 							if type(comment) == list:
 								offset += (len(comment) - 2)
-								comment = ('\n' + commentPrefix).join(comment)
-							contentListNew.insert(i+offset-1, commentPrefix + comment)
+								comment = ('\n' + prefix + commentPrefix).join(comment)
+							contentListNew.insert(i+offset-1, prefix + commentPrefix + comment)
 				print('\n'.join(contentListNew))
 			with open(os.path.join(dirpath, fn+".scc"), "w") as f:
 				f.write('\n'.join(contentListNew))
