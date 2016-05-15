@@ -41,4 +41,4 @@ class HackerComments:
 
 	@classmethod
 	def isMatching(self, line):
-		return len(line) > 10
+		return '#' in line
