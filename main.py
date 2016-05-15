@@ -24,14 +24,17 @@ for dirpath, dirnames, filenames in os.walk(path):
 				content = f.read()
 				contentList = content.split('\n')
 				contentListNew = contentList[:]
+				offset = 0
 				for i, line in enumerate(contentList):
 					for rulec in patternFinder.getAllRules():
-						rule = rulec(content, line)
+						rule = rulec(content, line.strip())
 						if rule.isMatching():
 							comment = rule.getComment()
+							offset += 1
 							if type(comment) == list:
-								comment =  ('\n' + commentPrefix).join(comment)
-							contentListNew.insert(i, commentPrefix + comment)
+								offset += len(comment) - 1
+								comment = ('\n' + commentPrefix).join(comment)
+							contentListNew.insert(i+offset, commentPrefix + comment)
 				print('\n'.join(contentListNew))
 			with open(os.path.join(dirpath, fn+".scc"), "w") as f:
 				f.write('\n'.join(contentListNew))
