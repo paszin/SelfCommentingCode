@@ -19,7 +19,9 @@ def getAllRules():
 
 
 class Rule:
-	'''Basic Class, all Rules are inherited from this''' 
+	'''Basic Class, all Rules are inherited from this'''
+
+	frequency = 0.5 #add some randomness
 
 	def __init__(self, content, line):
 		self.content = content
@@ -32,16 +34,22 @@ class Rule:
 		return ''
 
 
-class TheEasyPlusRule(Rule):
-	
-	def getComment(self ):
-		return "This line uses the famous + operator"
+class ExplainTheBasics(Rule):
+	'''when a line contains a plus, explain how awesome this is'''
 
+	frequency = 0.4
+
+	def getComment(self):
+		return "This line uses the {what} + operator".format(what=phrases.getRandomAdjective())
 	
-	def isMatching(self ):
-		return '+' in self.line
+	def isMatching(self):
+		return '+' in self.line and '+=' not in self.line
+
+
 
 class StackOverflowCommentary(Rule):
+
+	frequency = 0.3
 
 	def getLibs(self):
 		'''returns a list with names of used libaries'''
@@ -58,8 +66,9 @@ class StackOverflowCommentary(Rule):
 		url = so_helper.getSOUrl(q)
 		print(url)
 		data = requests.get(url).json()
+		question = random.choice(data['items'])
 		#print(data['items'][0])
-		return str(data['items'][0][u'title']) + '\n#' + "Details: " + "http://stackoverflow.com/questions/" + str(data['items'][0]['question_id'])
+		return [str(question[u'title']), "Details: " + "http://stackoverflow.com/questions/" + str(question['question_id'])]
 	
 	
 	def isMatching(self):
@@ -71,30 +80,37 @@ class StackOverflowCommentary(Rule):
 
 
 class HackerComments(Rule):
+
+	frequency = 1
 	
 	def getComment(self):
 		comment = subprocess.Popen("ruby faker.rb", shell=True, stdout=subprocess.PIPE).stdout.read()
 		return comment.split('\n')
 	
 	def isMatching(self):
-		return '#' in self.line
+		return '#' in self.line and '#&#' not in self.line
 
 class Todo(Rule):
 
-	def getComment(self):
-		return "TODO: consider scenario where " + (self.line.replace('if', 'if ').replace(2*' ', ' ').split(" ")[1]).strip() + " > 5"
+	frequency = 0.7
 
+	def getComment(self):
+		return "TODO: consider scenario where " + (self.line.replace('if', 'if ').replace(2*' ', ' ').split(" ")[1]).strip() + " > " + str(random.randrange(10))
 
 	def isMatching(self):
 		return self.line.startswith('if')
 
 class BuiltInExplain(Rule):
 
-	keywords = ["range", "xrange", "map", "max", "min", " int", "len", "str", "abs", "enumerate", "buffer"]
+	frequency = 0.5
+
+	keywords = ["range", "xrange", "map", "max", "min", " int", "len", "str", "abs", "enumerate", "buffer", "filter"]
 
 	def getComment(self):
 		return " ".join([phrases.getRandomOpinion()+",", 
-			"because", self.matchingKeyword, eval(self.matchingKeyword+'.__doc__').split('\n')[0]]).replace(self.matchingKeyword + ' ' + self.matchingKeyword, self.matchingKeyword)
+			"because", 
+			self.matchingKeyword, 
+			eval(self.matchingKeyword+'.__doc__').split('\n')[0]]).replace(self.matchingKeyword + ' ' + self.matchingKeyword, self.matchingKeyword)
 
 	def isMatching(self):
 		for k in self.keywords:
@@ -156,6 +172,18 @@ class Excuses(Rule):
 	def isMatching(self):
 		return 'print' in self.line
 
+class CopyCode(Rule):
+
+	def getComment(self):
+		return "This code is copied from "
+
+	def isMatching(self):
+		return self.line.startswith("def")
+
+class GitBlame(Rule):
+	pass
+
+	
 if __name__ == '__main__':
 	print("Test Patterns")
 	content = '''import sys
