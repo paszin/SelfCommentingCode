@@ -6,13 +6,12 @@ import inspect
 import sys
 import os
 import json
+import subprocess
 
 def getAllRules():
     return [obj for name, obj in inspect.getmembers(sys.modules[__name__]) if inspect.isclass(obj)]
-        
 
 class TheEasyPlusRule:
-
 	@classmethod
 	def getComment(self, line, content):
 		return "This line uses the famous + operator"
@@ -20,7 +19,6 @@ class TheEasyPlusRule:
 	@classmethod
 	def isMatching(self, line, content):
 		return '+' in line
-
 
 class StackOverflowCommentary:
 
@@ -36,10 +34,18 @@ class StackOverflowCommentary:
 	@classmethod
 	def getComment(self, line, content=None):
 		return "go to stackoverflow" ## replace this with stackoverflow call
-
 	@classmethod
 	def isMatching(self, line, content=None):
 		libs = StackOverflowCommentary.getLibs(content)
 		for lib in libs:
 			if lib in line:
 				return True
+
+class HackerComments:
+	@classmethod
+	def getComment(self, line):
+		return subprocess.Popen("ruby faker.rb", shell=True, stdout=subprocess.PIPE).stdout.read()
+
+	@classmethod
+	def isMatching(self, line):
+		return '#' in line
