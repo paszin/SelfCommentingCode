@@ -4,7 +4,9 @@ this serious tool will make your code more readable, easier to understand and mo
 
 ## Setup
 `brew install ruby`
+`gem install faker`
 `pip install requests`
+`install-monty.sh <full_path_to_this_dir>`
 
 ## Comment Types
 
@@ -20,7 +22,7 @@ this serious tool will make your code more readable, easier to understand and mo
 
 [x] do not touch
 
-[x] faked phrases 
+[x] faked phrases
 
 [x] ~~reasons~~ excuses ~~(## do this for compatibility with version 3 from __future__ import print_function)~~
 
