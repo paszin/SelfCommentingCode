@@ -8,6 +8,39 @@ this serious tool will make your code more readable, easier to understand and mo
 `pip install requests`
 `install-monty.sh <full_path_to_this_dir>`
 
+## Hall of Fame
+
+```#&# NOTFOUND is 404 but it could also be 746.113 or 13416.0
+
+NOTFOUND=404```
+
+
+## Hall of Shame
+
+```#&# TODO: consider scenario where a > 0
+
+if a > 0:```
+
+
+```#&# That worked perfectly when I developed it
+
+		print "Not Supported: URLs include \"..\", Java, Javascript, CGI"
+
+		#&# It was working in my head
+
+		print "Not Supported: directories / /etc /bin /lib /tmp /usr /dev /sbin"
+
+		#&# The original specification contained conflicting requirements
+
+		print "The -d flag runs the server as a daemon"
+
+		#&# I must have been stress testing our production server
+
+		print "No warranty given or implied"
+
+		```
+
+
 ## Comment Types
 
 [x] Stackoverflow link (search for namespace of modules with 'bug')
@@ -36,25 +69,3 @@ this serious tool will make your code more readable, easier to understand and mo
 
 [ ] ascii arts
 
-
-## Hall of Fame
-
-```#&# NOTFOUND is 404 but it could also be 746.113 or 13416.0
-NOTFOUND=404```
-
-
-## Hall of Shame
-
-```#&# TODO: consider scenario where a > 0
-if a > 0:```
-
-
-```#&# That worked perfectly when I developed it
-		print "Not Supported: URLs include \"..\", Java, Javascript, CGI"
-		#&# It was working in my head
-		print "Not Supported: directories / /etc /bin /lib /tmp /usr /dev /sbin"
-		#&# The original specification contained conflicting requirements
-		print "The -d flag runs the server as a daemon"
-		#&# I must have been stress testing our production server
-		print "No warranty given or implied"
-		```
