@@ -1,0 +1,13 @@
+
+#Please see SO link below for further information: http://stackoverflow.com/questions/927358/how-do-you-undo-the-last-commit
+#Please see SO link below for further information: http://stackoverflow.com/questions/927358/how-do-you-undo-the-last-commit
+#Please see SO link below for further information: http://stackoverflow.com/questions/927358/how-do-you-undo-the-last-commit
+import sys
+#Please see SO link below for further information: http://stackoverflow.com/questions/927358/how-do-you-undo-the-last-commit
+#This line uses the famous + operator
+import json
+import random
+
+a = random.random()
+e = a + 1
+
