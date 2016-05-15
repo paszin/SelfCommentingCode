@@ -11,6 +11,7 @@ import subprocess
 import requests
 import so_helper
 import phrases_pool as phrases
+import gitblame_helper
 import programmingexcuses as excuses
 
 
@@ -61,20 +62,20 @@ class StackOverflowCommentary(Rule):
 
 	
 	def getComment(self):
-		return "Placeholder for SO link" ## save some time
-		q = self.lib + " bug" 
+		#return "Placeholder for SO link" ## save some time
+		q = self.lib + random.choice([" bug", " problem", " help"]) 
 		url = so_helper.getSOUrl(q)
-		print(url)
+		#print(url)
 		data = requests.get(url).json()
 		question = random.choice(data['items'])
 		#print(data['items'][0])
-		return [str(question[u'title']), "Details: " + "http://stackoverflow.com/questions/" + str(question['question_id'])]
+		return [str(question[u'title']), "For more details go to " + "http://stackoverflow.com/questions/" + str(question['question_id'])]
 	
 	
 	def isMatching(self):
 		libs = self.getLibs()
 		for lib in libs:
-			if lib in self.line: # and random.random() > 0.5:
+			if lib in self.line and "import" not in self.line: # and random.random() > 0.5:
 				self.lib = lib
 				return True
 
@@ -88,7 +89,7 @@ class HackerComments(Rule):
 		return comment.split('\n')
 	
 	def isMatching(self):
-		return '#' in self.line and '#&#' not in self.line
+		return '#' in self.line and '#&#' not in self.line or "import" in self.line
 
 class Todo(Rule):
 
@@ -181,7 +182,15 @@ class CopyCode(Rule):
 		return self.line.startswith("def")
 
 class GitBlame(Rule):
-	pass
+	
+
+	def getComment(self):
+		pass
+		#i = self.content.splitlines().index(self.line)
+		#gitblame_helper.blame(i)
+
+	def isMatching(self):
+		return False #self.content.count(self.line) > 1 and self.line.strip()
 
 	
 if __name__ == '__main__':

@@ -1,5 +1,5 @@
 from ctypes  import get_errno
-from multiprocessing import Process
+import multiprocessing
 import os
 import sys
 import signal
