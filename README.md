@@ -17,3 +17,4 @@ this serious tool will make your code more readable, easier to understand and mo
 [ ] reasons (## do this for compatibility with version 3 from __future__ import print_function)
 [ ] git blame and commit logs
 [ ] poetry
+[ ] random facts
