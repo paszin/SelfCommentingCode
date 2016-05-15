@@ -14,24 +14,32 @@ def getAllRules():
 class TheEasyPlusRule:
 
 	@classmethod
-	def getComment(self, line):
-		return "#This line uses the famous + operator"
+	def getComment(self, line, content):
+		return "This line uses the famous + operator"
 
 	@classmethod
-	def isMatching(self, line):
+	def isMatching(self, line, content):
 		return '+' in line
 
 
 class StackOverflowCommentary:
-	@classmethod
-	def getComment(self, line):
-		json_string = "".join(os.popen('googler %s -j -w stackoverflow.com --json' % line))
-		parsed = json.loads(json_string)
-		abstract = parsed[0]['abstract']
-		link = parsed[0]['url']
-		return "{abstract}\n Please see SO link below for further information: \n{link}".format(**locals())
 
 	@classmethod
-	def isMatching(self, line):
-		return len(line) > 100
+	def getLibs(self, content):
+		'''returns a list with names of used libaries'''
+		libs = []
+		for line in content.split('\n'):
+			if line.startswith('import'):
+				libs.append(line.split(' ')[1])
+		return libs
 
+	@classmethod
+	def getComment(self, line, content=None):
+		return "go to stackoverflow" ## replace this with stackoverflow call
+
+	@classmethod
+	def isMatching(self, line, content=None):
+		libs = StackOverflowCommentary.getLibs(content)
+		for lib in libs:
+			if lib in line:
+				return True
