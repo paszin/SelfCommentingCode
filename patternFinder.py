@@ -132,7 +132,20 @@ class Meaning(Rule):
 			return name + 'is ' + value + ' but it could also be ' + str(round(float(value)*random.random()*2, 3)) + ' or ' + str(round(float(value)*random.random()*80, 1))
 
 	def isMatching(self):
-		return '=' in self.line and '+=' not in self.line and len(self.line.split('=')) == 2
+		return '=' in self.line and '+' not in self.line and '-' not in self.line and len(self.line.split('=')) == 2
+
+
+class NumberFacts(Rule):
+
+	def getComment(self):
+		return requests.get("http://numbersapi.com/{number}/math".format(number=self.number)).text
+
+	def isMatching(self):
+		numbers = [int(s) for s in self.line.split() if s.isdigit()]
+		if numbers:
+			self.number = random.choice(numbers)
+			return True
+		return False
 
 
 if __name__ == '__main__':
@@ -153,6 +166,11 @@ if __name__ == '__main__':
 
 	r = Meaning('', 'c = 4')
 	print(r.isMatching(), r.getComment())
+
+	r = NumberFacts('', 'c = 4')
+	print(r.isMatching(), r.getComment())
+
+
 
 
 

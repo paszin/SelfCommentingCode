@@ -11,7 +11,7 @@ this serious tool will make your code more readable, easier to understand and mo
 
 [x] operator comments (e.g. +, =)
 
-[ ] meaning for variables (`todos = [] # this array contains ...`)
+[x] meaning for variables (`todos = [] # this array contains ...`)
 
 [x] todos
 
@@ -29,4 +29,7 @@ this serious tool will make your code more readable, easier to understand and mo
 
 [ ] random facts
 
+[ ] number facts
+
 [ ] ascii arts
+
