@@ -51,7 +51,7 @@ class StackOverflowCommentary(Rule):
 
 	
 	def getComment(self):
-		
+		return "Placeholder for SO link" ## save some time
 		q = self.lib + " bug" 
 		url = so_helper.getSOUrl(q)
 		print(url)
@@ -80,15 +80,15 @@ class HackerComments(Rule):
 class Todo(Rule):
 
 	def getComment(self):
-		return "TODO: consider scenario where " + (self.line.split(" ")[0]).strip() + " > 5"
+		return "TODO: consider scenario where " + (self.line.replace('if', 'if ').split(" ")[1]).strip() + " > 5"
 
 
 	def isMatching(self):
-		return random.random() > 0.95
+		return self.line.startswith('if')
 
 class BuiltInExplain(Rule):
 
-	keywords = ["range", "xrange", "map", "max", "min", "int", "len", "str"]
+	keywords = ["range", "xrange", "map", "max", "min", "int", "len", "str", "abs"]
 
 	def getComment(self):
 		return " ".join([phrases.getRandomOpinion()+",", 
