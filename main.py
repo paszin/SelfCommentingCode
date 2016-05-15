@@ -14,6 +14,7 @@ except:
 	path = "./example"
 
 endings = ["py"]
+commentPrefix = '#&#'
 
 for dirpath, dirnames, filenames in os.walk(path):
 	for fn in filenames:
@@ -24,11 +25,13 @@ for dirpath, dirnames, filenames in os.walk(path):
 				contentList = content.split('\n')
 				contentListNew = contentList[:]
 				for i, line in enumerate(contentList):
-					for rule in patternFinder.getAllRules():
-						if rule.isMatching(line, content):
-							print(rule)
-							comment = '#' + rule.getComment(line, content)
-							contentListNew.insert(i, comment)
+					for rulec in patternFinder.getAllRules():
+						rule = rulec(content, line)
+						if rule.isMatching():
+							comment = rule.getComment()
+							if type(comment) == list:
+								comment =  ('\n' + commentPrefix).join(comment)
+							contentListNew.insert(i, commentPrefix + comment)
 				print('\n'.join(contentListNew))
 			with open(os.path.join(dirpath, fn+".scc"), "w") as f:
 				f.write('\n'.join(contentListNew))
