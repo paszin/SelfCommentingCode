@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "python $1/main.py
+echo "python $1main.py
 git add .
 exit 0" > $PWD/.git/hooks/pre-commit
 
