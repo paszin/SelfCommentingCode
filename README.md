@@ -15,9 +15,9 @@ this serious tool will make your code more readable, easier to understand and mo
 
 [x] todos
 
-[ ] fixme
+[x] fixme
 
-[ ] do not touch
+[x] do not touch
 
 [x] faked phrases 
 

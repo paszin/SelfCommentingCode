@@ -2,6 +2,7 @@ import random
 import math
 # Comment1
 
+c = 12
 a = abs(-9)
 
 if a > 0:

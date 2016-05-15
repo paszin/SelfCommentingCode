@@ -2,6 +2,7 @@
 
 import re
 import random
+import math
 import inspect
 import sys
 import os
@@ -92,7 +93,7 @@ class BuiltInExplain(Rule):
 
 	def getComment(self):
 		return " ".join([phrases.getRandomOpinion()+",", 
-			"because", self.matchingKeyword, eval(self.matchingKeyword+'.__doc__').split('\n')[0]])
+			"because", self.matchingKeyword, eval(self.matchingKeyword+'.__doc__').split('\n')[0]]).replace(self.matchingKeyword + ' ' + self.matchingKeyword, self.matchingKeyword)
 
 	def isMatching(self):
 		for k in self.keywords:
@@ -110,6 +111,28 @@ class FixMe(Rule):
 	def isMatching(self):
 		return self.line.count('.') > 2
 
+class DoNotToucht(Rule):
+
+	def getComment(self):
+		return "!DO NOT TOUCH!"
+
+	def isMatching(self):
+		return len(self.line) > 80
+
+
+class Meaning(Rule):
+
+	def getComment(self):
+		name, value = self.line.split('=')
+		try:
+			float(value)
+		except:
+			return name + 'stores the state of the process'
+		else:
+			return name + 'is ' + value + ' but it could also be ' + str(round(float(value)*random.random()*2, 3)) + ' or ' + str(round(float(value)*random.random()*80, 1))
+
+	def isMatching(self):
+		return '=' in self.line and '+=' not in self.line and len(self.line.split('=')) == 2
 
 
 if __name__ == '__main__':
@@ -127,5 +150,10 @@ if __name__ == '__main__':
 
 	r = FixMe('', '...')
 	print(r.isMatching(), r.getComment())
+
+	r = Meaning('', 'c = 4')
+	print(r.isMatching(), r.getComment())
+
+
 
 
