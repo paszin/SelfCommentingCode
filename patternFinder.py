@@ -42,7 +42,7 @@ class ExplainTheBasics(Rule):
 
 	def getComment(self):
 		return "This line uses the {what} + operator".format(what=phrases.getRandomAdjective())
-	
+
 	def isMatching(self):
 		return '+' in self.line and '+=' not in self.line
 
@@ -60,18 +60,18 @@ class StackOverflowCommentary(Rule):
 				libs.append(line.split(' ')[1])
 		return libs
 
-	
+
 	def getComment(self):
 		#return "Placeholder for SO link" ## save some time
-		q = self.lib + random.choice([" bug", " problem", " help"]) 
+		q = self.lib + random.choice([" bug", " problem", " help"])
 		url = so_helper.getSOUrl(q)
 		#print(url)
 		data = requests.get(url).json()
 		question = random.choice(data['items'])
 		#print(data['items'][0])
 		return [str(question[u'title']), "For more details go to " + "http://stackoverflow.com/questions/" + str(question['question_id'])]
-	
-	
+
+
 	def isMatching(self):
 		libs = self.getLibs()
 		for lib in libs:
@@ -83,10 +83,10 @@ class StackOverflowCommentary(Rule):
 class HackerComments(Rule):
 
 	frequency = 1
-	
+
 	def getComment(self):
 		return phrases.getRandomHackerComment() #subprocess.Popen("ruby faker.rb", shell=True, stdout=subprocess.PIPE).stdout.read()
-	
+
 	def isMatching(self):
 		return '#' in self.line and '#&#' not in self.line or "import" in self.line
 
@@ -107,9 +107,9 @@ class BuiltInExplain(Rule):
 	keywords = ["range", "xrange", "map", "max", "min", " int", "len", "str", "abs", "enumerate", "buffer", "filter"]
 
 	def getComment(self):
-		return " ".join([phrases.getRandomOpinion()+",", 
-			"because", 
-			self.matchingKeyword, 
+		return " ".join([phrases.getRandomOpinion()+",",
+			"because",
+			self.matchingKeyword,
 			eval(self.matchingKeyword+'.__doc__').split('\n')[0]]).replace(self.matchingKeyword + ' ' + self.matchingKeyword, self.matchingKeyword)
 
 	def isMatching(self):
@@ -123,7 +123,7 @@ class FixMe(Rule):
 
 	def getComment(self):
 		bugUrl = "https://bugs.python.org/issue" + str(int(random.random()*10**5))
-		return "Fix: " + "This bahavoir is because of " + bugUrl
+		return "Fix: " + "This behavoir is because of " + bugUrl
 
 	def isMatching(self):
 		return self.line.count('.') > 2
@@ -131,7 +131,7 @@ class FixMe(Rule):
 class DoNotToucht(Rule):
 
 	def getComment(self):
-		return "!DO NOT TOUCH! Crucial to Thread Locking"  
+		return "!DO NOT TOUCH! Crucial to Thread Locking"
 
 	def isMatching(self):
 		return len(self.line) > 80
@@ -181,7 +181,7 @@ class CopyCode(Rule):
 		return self.line.startswith("def")
 
 class GitBlame(Rule):
-	
+
 
 	def getComment(self):
 		pass
@@ -191,14 +191,14 @@ class GitBlame(Rule):
 	def isMatching(self):
 		return False #self.content.count(self.line) > 1 and self.line.strip()
 
-	
+
 if __name__ == '__main__':
 	print("Test Patterns")
 	content = '''import sys
 	sys.argv
 	abs(-4)'''
 	s = StackOverflowCommentary('sys.argv', 'import sys')
-	if s.isMatching(): 
+	if s.isMatching():
 		print(s.isMatching(), s.lib)
 		print(s.getComment())
 
