@@ -36,6 +36,7 @@ class StackOverflowCommentary:
 		return "go to stackoverflow" ## replace this with stackoverflow call
 	@classmethod
 	def isMatching(self, line, content=None):
+		return False ##skip for now
 		libs = StackOverflowCommentary.getLibs(content)
 		for lib in libs:
 			if lib in line:
@@ -43,9 +44,22 @@ class StackOverflowCommentary:
 
 class HackerComments:
 	@classmethod
-	def getComment(self, line):
+	def getComment(self, line, content):
 		return subprocess.Popen("ruby faker.rb", shell=True, stdout=subprocess.PIPE).stdout.read()
 
 	@classmethod
-	def isMatching(self, line):
+	def isMatching(self, line, content):
 		return '#' in line
+
+
+class Todo:
+
+	@classmethod
+	def getComment(self, line, content):
+		return "TODO: consider scenario where " + line.split(" ")[0] + "> 5"
+
+
+	@classmethod
+	def isMatching(self, line, content):
+		return random.random() > 0.95
+
