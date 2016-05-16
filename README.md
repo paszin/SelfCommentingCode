@@ -1,5 +1,7 @@
 # Monty
 
+Better than self documented code, self commented code
+
 Everybody hates writing comments. And erverybody is complaining about missing helpful comments.
 
 This serious tool will make your code more readable, easier to understand and more fun to collaborate
@@ -8,8 +10,6 @@ This serious tool will make your code more readable, easier to understand and mo
 
 ## Setup
 `brew install ruby`
-
-`gem install faker`
 
 `pip install requests`
 
@@ -29,20 +29,18 @@ A pre-commit hook will also have been installed in your project directory.
 ## Hall of Fame
 
 ```#&# NOTFOUND is 404 but it could also be 746.113 or 13416.0
-
 NOTFOUND=404```
 
 
 ## Hall of Shame
 
 ```#&# TODO: consider scenario where a > 0
-
 if a > 0:```
 
 
 ```#&# That worked perfectly when I developed it
 
-		print "Not Supported: URLs include \"..\", Java, Javascript, CGI"
+print "Not Supported: URLs include \"..\", Java, Javascript, CGI"
 
 		#&# It was working in my head
 
