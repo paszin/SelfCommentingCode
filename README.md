@@ -28,18 +28,32 @@ A pre-commit hook will also have been installed in your project directory.
 
 ## Hall of Fame
 
-```#&# NOTFOUND is 404 but it could also be 746.113 or 13416.0
+```
+#&# NOTFOUND is 404 but it could also be 746.113 or 13416.0
 
-NOTFOUND=404```
+NOTFOUND=404 
+```
 
+```
+#&# This is amazing, because range(stop) -> list of integers
+for i in range(10):
+	#&# 7 is the sum of any two opposite sides on a standard six-sided die.
+	LOG += 7
+```
 
+```
+#&# logbuffer is a semaphores tor thread locking
+	logbuffer=""
+	```
 ## Hall of Shame
 
-```#&# TODO: consider scenario where a > 0
+```
+#&# TODO: consider scenario where a > 0
 if a > 0:```
 
 
-```#&# That worked perfectly when I developed it
+```
+#&# That worked perfectly when I developed it
 
 print "Not Supported: URLs include \"..\", Java, Javascript, CGI"
 
