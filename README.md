@@ -48,14 +48,10 @@ for i in range(10):
 ## Hall of Shame
 
 ```
-#&# TODO: consider scenario where a > 0
+#TODO: consider scenario where a > 0
 if a > 0:```
 
-
 ```
-#&# That worked perfectly when I developed it
-
-print "Not Supported: URLs include \"..\", Java, Javascript, CGI"
 
 		#&# It was working in my head
 
@@ -69,7 +65,7 @@ print "Not Supported: URLs include \"..\", Java, Javascript, CGI"
 
 		print "No warranty given or implied"
 
-		```
+```
 
 
 ## Comment Types
