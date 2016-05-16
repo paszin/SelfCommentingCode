@@ -44,7 +44,7 @@ for i in range(10):
 ```
 #&# logbuffer is a semaphores tor thread locking
 	logbuffer=""
-	```
+```
 ## Hall of Shame
 
 
@@ -67,7 +67,6 @@ if a > 0:
 		#&# I must have been stress testing our production server
 
 		print "No warranty given or implied"
-
 ```
 
 
