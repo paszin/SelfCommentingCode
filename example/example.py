@@ -1,17 +1,12 @@
-from ctypes  import get_errno
 import multiprocessing
 import os
 import sys
-import signal
 import socket
 
-# The MIME for the type of data supported
 
 extn = {  "gif":"image/gif" , "jpg":"image/jpg" , "jpeg":"image/jpeg", "png":"image/png", "ico":"image/ico", "zip":"image/zip",  
         "gz":"image/gz" , "tar":"image/tar", "htm":"text/html", "html":"text/html", "txt":"text/text",  
         chr(0):chr(0) };
-
-# directories which cannot be used to host the web server
 
 unsupported =["/","/etc","/bin","/lib","/tmp","/usr","/dev","/sbin"]
 
@@ -19,9 +14,22 @@ unsupported =["/","/etc","/bin","/lib","/tmp","/usr","/dev","/sbin"]
 
 BUFSIZE=8192
 ERROR=42
-LOG=44
-FORBIDDEN=403
+LOG = ERROR + 2
+
 NOTFOUND=404
+
+if LOG > ERROR:
+	print("debug")
+	ERROR = abs(ERROR)
+
+
+for i in range(10):
+	LOG += 7
+
+os.chdir("folder")
+## Calculate HTTP Code
+FORBIDDEN = NOTFOUND - 1
+
 
 # list of custom interrupts
 def customSIGINT(foo,bar):

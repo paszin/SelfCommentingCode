@@ -15,27 +15,26 @@ import patternFinder
 parser = argparse.ArgumentParser(description='this serious tool will make your code more readable, easier to understand and more fun to collaborate')
 parser.add_argument('--path', metavar='P', type=str,
                    help='path to your codebase')
-parser.add_argument('--skip', action="store_true",
+parser.add_argument('--newfile', action="store_true",
+                   help='adds the comment to a new file')
+parser.add_argument('--messup', action="store_true",
                    help='whatever')
-parser.add_argument('--savedb', action="store_true",
-                   help='save results to database')
+parser.add_argument('--massivestackoverflow', action="store_true",
+                   help='comments every line with a stackoverflow link')
+#parser.add_argument('--savedb', action="store_true",
+#                   help='save results to database')
 
 
-#args = parser.parse_args()
-#path = args.path
-#skip = args.skip
-#savedb = args.savedb
-
-try:
-	path = sys.argv[1]
-except:
-	path = "./example"
+args = parser.parse_args()
+path = args.path
+print(path)
+path = "example"
 
 endings = ["py"]
 commentPrefix = '#&# '
 noFrequency = True
-newFile = True
-onlyOneComment = True
+newFile = False #args.newfile
+onlyOneComment = True #args.messup
 
 for dirpath, dirnames, filenames in os.walk(path):
 	for fn in filenames:
@@ -53,8 +52,12 @@ for dirpath, dirnames, filenames in os.walk(path):
 						rule = rulec(content, line.strip())
 						if rule.isMatching() and (random.random() <= rule.frequency or noFrequency):
 							prefix = line.split(line.strip())[0] #code with indentation
-							comment = rule.getComment()
+							try:
+								comment = rule.getComment()
+							except:
+								continue
 							offset += 1
+							print(rule)
 							if type(comment) == list:
 								offset += (len(comment) - 2)
 								comment = ('\n' + prefix + commentPrefix).join(comment)
@@ -62,5 +65,9 @@ for dirpath, dirnames, filenames in os.walk(path):
 							if onlyOneComment:
 								break
 				print('\n'.join(contentListNew))
-			with open(os.path.join(dirpath, fn+".scc"), "w") as f:
+				if newFile:
+					ending = ".monty"
+				else:
+					ending = ""
+			with open(os.path.join(dirpath, fn+ending), "w") as f:
 				f.write('\n'.join(contentListNew))
